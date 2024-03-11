@@ -8,7 +8,7 @@ import { Observable, Subject, from } from 'rxjs';
 })
 export class DocumentsService {
   documentSelectedEvent = new EventEmitter<Document>();
-  documentChangedEvent = new EventEmitter<Document[]>();
+  //documentChangedEvent = new EventEmitter<Document[]>();
   documentListChangedEvent = new Subject<Document[]>();
 
 
@@ -34,6 +34,6 @@ export class DocumentsService {
        return;
     }
     this.documents.splice(pos, 1);
-    this.documentChangedEvent.emit(this.documents.slice());
+    this.documentListChangedEvent.next(this.documents.slice());
  }
 }
