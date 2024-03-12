@@ -82,5 +82,3 @@ updateDocument(originalDocument: Document, newDocument: Document) {
   this.documentListChangedEvent.next(this.documents.slice());
 }
 }
-
-
