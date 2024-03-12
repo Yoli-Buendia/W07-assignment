@@ -11,11 +11,13 @@ export class ContactsService {
   contactSelectedEvent = new EventEmitter<Contact>()
   //contactChangedEvent = new EventEmitter<Contact[]>();
   contactListChangedEvent = new Subject<Contact[]>();
-  /*maxContactId: number;*/
+  maxContactId: number;
+  contactsListClone: Contact[];
+
 
   constructor() { 
     this.contacts = MOCKCONTACTS;
-    //this.maxContactId = this.getMaxId();
+    this.maxContactId = this.getMaxId();
   }
 
   private contacts: Contact[] = [];
@@ -40,7 +42,7 @@ deleteContact(contact: Contact) {
   this.contactListChangedEvent.next(this.contacts.slice());
 }
 
-/*getMaxId(): number {
+getMaxId(): number {
   let maxId = 0;
   for (let contact of this.contacts) {
     let currentId = parseInt(contact.id);
@@ -49,21 +51,18 @@ deleteContact(contact: Contact) {
     }
   }
   return maxId;
-}*/
-/*addContact(newContact: Contact) {
+}
+
+addContact(newContact: Contact) {
   if (!newContact) {
     return;
   }
 
-  this.maxContactId++
-  let maxIdString = this.maxContactId.toString();
-  newContact.id = maxIdString;
-
+  this.maxContactId++;
+  newContact.id = this.maxContactId.toString();
   this.contacts.push(newContact);
-  this.contactListChangedEvent.next(this.contacts.slice());
-}*/
-
+  this.contactsListClone = this.contacts.slice();
+  this.contactListChangedEvent.next(this.contactsListClone);
 }
 
-
-
+}
