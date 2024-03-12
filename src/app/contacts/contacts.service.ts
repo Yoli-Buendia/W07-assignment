@@ -65,4 +65,24 @@ addContact(newContact: Contact) {
   this.contactListChangedEvent.next(this.contactsListClone);
 }
 
+updateContact(originalContact: Contact, newContact: Contact) {
+  if (originalContact === undefined || originalContact === null) {
+    return;
+  }
+  if (newContact === undefined || newContact === null) {
+    return;
+  }
+
+  const position = this.contacts.indexOf(originalContact);
+  if (position < 0) {
+    return;
+  }
+
+  newContact.id = originalContact.id;
+  this.contacts[position] = newContact;
+  this.contactsListClone = this.contacts.slice();
+  this.contactListChangedEvent.next(this.contactsListClone);
+
+}
+
 }
