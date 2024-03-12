@@ -40,6 +40,9 @@ deleteContact(contact: Contact) {
   }
   this.contacts.splice(pos, 1);
   this.contactListChangedEvent.next(this.contacts.slice());
+
+  this.contactsListClone = this.contacts.slice();
+  this.contactListChangedEvent.next(this.contactsListClone);
 }
 
 getMaxId(): number {
