@@ -64,4 +64,23 @@ addDocument(newDocument: Document) {
   this.documentListChangedEvent.next(this.documents.slice());
 }
 
+updateDocument(originalDocument: Document, newDocument: Document) {
+  if (originalDocument === undefined || originalDocument === null) {
+    return;
+  }
+  if (newDocument === undefined || newDocument === null) {
+    return;
+  }
+
+  const position = this.documents.indexOf(originalDocument);
+  if (position < 0) {
+    return;
+  }
+
+  newDocument.id = originalDocument.id;
+  this.documents[position] = newDocument;
+  this.documentListChangedEvent.next(this.documents.slice());
+}
+}
+
 }
